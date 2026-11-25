@@ -1,0 +1,20 @@
+{
+  "name": "ai-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node bot/index.mjs",
+    "tunnel": "cloudflared tunnel --url http://localhost:3000",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.14.4",
+    "dotenv": "^16.5.0",
+    "hono": "^4.7.10"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}

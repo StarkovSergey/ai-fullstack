@@ -1,0 +1,23 @@
+# Secrets
+token.mjs
+.env
+.env.*
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / editor
+.idea/
+.vscode/
+.cursor/
+*.swp
+*.swo
