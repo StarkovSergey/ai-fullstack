@@ -1,14 +1,9 @@
 export const weatherApiClient = {
-  apiKey: null,
   baseUrl: 'https://api.weatherapi.com/v1',
-
-  init({ apiKey }) {
-    this.apiKey = apiKey
-  },
 
   async getCurrent(query) {
     const url = new URL(`${this.baseUrl}/current.json`)
-    url.searchParams.set('key', this.apiKey)
+    url.searchParams.set('key', process.env.WEATHER_API_KEY)
     url.searchParams.set('q', query)
     url.searchParams.set('aqi', 'no')
 

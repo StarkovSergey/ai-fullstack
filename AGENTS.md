@@ -23,18 +23,24 @@
 | **Application**  | `application/`  | Бизнес-сценарии (use cases). Содержат логику «что сделать» с данными пользователя.                                                                  | `echo-message-use-case.mjs`   |
 | **Adapters**     | `adapters/`     | Доступ к внешним системам и инфраструктуре (Telegram Bot API, БД, файлы и т.п.).                                                                    | `telegram-api-client.mjs`     |
 
-Эталонная структура (см. `03-3-layered-architecture/`):
+Эталонная структура (актуальный бот — `bot/`, стиль как в `07-hono-simple-backend`):
 
 ```text
-03-3-layered-architecture/
-  index.mjs                         # composition root — только сборка и старт
+bot/
+  index.mjs                         # composition root — serve + setWebhook
   presentation/
-    telegram-polling-server.mjs
+    http-app.mjs                    # Hono app
+    telegram-webhook-router.mjs     # Hono sub-router POST /webhook
+    telegram-message-router.mjs     # маршрутизация команд → use case
   application/
-    echo-message-use-case.mjs
+    start-use-case.mjs
+    …
   adapters/
     telegram-api-client.mjs
+    …
 ```
+
+Зависимости связываем **прямыми импортами** (как в уроке), без `init()` / DI-контейнера.
 
 ## Именование файлов
 

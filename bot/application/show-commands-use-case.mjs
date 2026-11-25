@@ -1,10 +1,6 @@
+import { telegramApiClient } from '../adapters/telegram-api-client.mjs'
+
 export const showCommandsUseCase = {
-  telegramApiClient: null,
-
-  init({ telegramApiClient }) {
-    this.telegramApiClient = telegramApiClient
-  },
-
   getCommandsText() {
     return [
       'Доступные команды:',
@@ -21,6 +17,6 @@ export const showCommandsUseCase = {
       ? `${preface}\n\n${this.getCommandsText()}`
       : this.getCommandsText()
 
-    await this.telegramApiClient.sendMessage(chatId, text)
+    await telegramApiClient.sendMessage(chatId, text)
   },
 }

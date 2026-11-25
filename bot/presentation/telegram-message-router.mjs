@@ -1,21 +1,9 @@
+import { startUseCase } from '../application/start-use-case.mjs'
+import { showCommandsUseCase } from '../application/show-commands-use-case.mjs'
+import { convertCurrencyUseCase } from '../application/convert-currency-use-case.mjs'
+import { getWeatherUseCase } from '../application/get-weather-use-case.mjs'
+
 export const telegramMessageRouter = {
-  startUseCase: null,
-  showCommandsUseCase: null,
-  convertCurrencyUseCase: null,
-  getWeatherUseCase: null,
-
-  init({
-    startUseCase,
-    showCommandsUseCase,
-    convertCurrencyUseCase,
-    getWeatherUseCase,
-  }) {
-    this.startUseCase = startUseCase
-    this.showCommandsUseCase = showCommandsUseCase
-    this.convertCurrencyUseCase = convertCurrencyUseCase
-    this.getWeatherUseCase = getWeatherUseCase
-  },
-
   async handleUpdate(update) {
     const message = update.message
     const text = message?.text
@@ -30,16 +18,16 @@ export const telegramMessageRouter = {
 
     switch (command) {
       case '/start':
-        await this.startUseCase.execute({ chatId })
+        await startUseCase.execute({ chatId })
         break
       case '/convert':
-        await this.convertCurrencyUseCase.execute({ chatId, args })
+        await convertCurrencyUseCase.execute({ chatId, args })
         break
       case '/weather':
-        await this.getWeatherUseCase.execute({ chatId, args })
+        await getWeatherUseCase.execute({ chatId, args })
         break
       default:
-        await this.showCommandsUseCase.execute({ chatId })
+        await showCommandsUseCase.execute({ chatId })
         break
     }
   },

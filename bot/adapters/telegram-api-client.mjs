@@ -1,43 +1,26 @@
+import { TELEGRAM_TOKEN, WEBHOOK_SECRET } from '../../token.mjs'
+
 export const telegramApiClient = {
-  baseUrl: null,
-
-  init({ token }) {
-    this.baseUrl = `https://api.telegram.org/bot${token}`
-  },
-
-  async setWebhook(url) {
-    const response = await fetch(`${this.baseUrl}/setWebhook`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ url }),
-    })
-
-    const data = await response.json()
-
-    if (!data.ok) {
-      throw new Error(
-        `setWebhook failed: ${data.description ?? response.status}`,
-      )
-    }
-
-    return data
-  },
+  baseUrl: `https://api.telegram.org/bot${TELEGRAM_TOKEN}`,
 
   async sendMessage(chatId, text) {
-    const response = await fetch(`${this.baseUrl}/sendMessage`, {
+    await fetch(this.baseUrl + '/sendMessage', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ chat_id: chatId, text }),
     })
+  },
 
-    const data = await response.json()
+  async setWebhook(webhookUrl) {
+    const response = await fetch(this.baseUrl + '/setWebhook', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        url: webhookUrl,
+        secret_token: WEBHOOK_SECRET,
+      }),
+    })
 
-    if (!data.ok) {
-      throw new Error(
-        `sendMessage failed: ${data.description ?? response.status}`,
-      )
-    }
-
-    return data
+    return response.json()
   },
 }

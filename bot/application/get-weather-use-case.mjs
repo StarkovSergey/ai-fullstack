@@ -1,17 +1,12 @@
+import { telegramApiClient } from '../adapters/telegram-api-client.mjs'
+import { weatherApiClient } from '../adapters/weather-api-client.mjs'
+
 export const getWeatherUseCase = {
-  telegramApiClient: null,
-  weatherApiClient: null,
-
-  init({ telegramApiClient, weatherApiClient }) {
-    this.telegramApiClient = telegramApiClient
-    this.weatherApiClient = weatherApiClient
-  },
-
   async execute({ chatId, args }) {
     const city = args.join(' ').trim()
 
     if (!city) {
-      await this.telegramApiClient.sendMessage(
+      await telegramApiClient.sendMessage(
         chatId,
         'Формат: /weather <city>\nПример: /weather Moscow',
       )
@@ -19,7 +14,7 @@ export const getWeatherUseCase = {
     }
 
     try {
-      const data = await this.weatherApiClient.getCurrent(city)
+      const data = await weatherApiClient.getCurrent(city)
       const { location, current } = data
 
       const place = [location.name, location.country].filter(Boolean).join(', ')
@@ -31,9 +26,9 @@ export const getWeatherUseCase = {
         `Влажность: ${current.humidity}%`,
       ].join('\n')
 
-      await this.telegramApiClient.sendMessage(chatId, text)
+      await telegramApiClient.sendMessage(chatId, text)
     } catch {
-      await this.telegramApiClient.sendMessage(
+      await telegramApiClient.sendMessage(
         chatId,
         `Не нашёл погоду для «${city}». Проверь название города.`,
       )

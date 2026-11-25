@@ -1,12 +1,8 @@
+import { showCommandsUseCase } from './show-commands-use-case.mjs'
+
 export const startUseCase = {
-  showCommandsUseCase: null,
-
-  init({ showCommandsUseCase }) {
-    this.showCommandsUseCase = showCommandsUseCase
-  },
-
   async execute({ chatId }) {
-    await this.showCommandsUseCase.execute({
+    await showCommandsUseCase.execute({
       chatId,
       preface: 'Привет! Я бот для курса и погоды 👋',
     })

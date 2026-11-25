@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "node bot/index.mjs",
+    "start": "node --watch bot/index.mjs",
     "tunnel": "cloudflared tunnel --url http://localhost:3000",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
