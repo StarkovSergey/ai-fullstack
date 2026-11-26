@@ -2,6 +2,7 @@ import { startUseCase } from '../application/start-use-case.mjs'
 import { showCommandsUseCase } from '../application/show-commands-use-case.mjs'
 import { convertCurrencyUseCase } from '../application/convert-currency-use-case.mjs'
 import { getWeatherUseCase } from '../application/get-weather-use-case.mjs'
+import { showJokeUseCase } from '../application/show-joke-use-case.mjs'
 
 export const telegramMessageRouter = {
   async handleUpdate(update) {
@@ -25,6 +26,9 @@ export const telegramMessageRouter = {
         break
       case '/weather':
         await getWeatherUseCase.execute({ chatId, args })
+        break
+      case '/joke':
+        await showJokeUseCase.execute({ chatId, args })
         break
       default:
         await showCommandsUseCase.execute({ chatId })

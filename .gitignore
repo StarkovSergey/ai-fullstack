@@ -1,7 +1,6 @@
 # Secrets
 token.mjs
 .env
-.env.*
 
 # Dependencies
 node_modules/

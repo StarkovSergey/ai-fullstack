@@ -9,6 +9,8 @@ export const showCommandsUseCase = {
       '  пример: /convert 100 USD EUR',
       '/weather <city> — текущая погода',
       '  пример: /weather Moscow',
+      '/joke [category] — случайная шутка',
+      '  пример: /joke programming',
     ].join('\n')
   },
 
