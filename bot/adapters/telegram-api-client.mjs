@@ -11,6 +11,18 @@ export const telegramApiClient = {
     })
   },
 
+  async sendPhoto(chatId, photo, caption) {
+    await fetch(this.baseUrl + '/sendPhoto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        photo,
+        ...(caption ? { caption } : {}),
+      }),
+    })
+  },
+
   async setWebhook(webhookUrl) {
     const response = await fetch(this.baseUrl + '/setWebhook', {
       method: 'POST',

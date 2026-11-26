@@ -11,6 +11,7 @@ export const showCommandsUseCase = {
       '  пример: /weather Moscow',
       '/joke [category] — случайная шутка',
       '  пример: /joke programming',
+      '/dog — случайное фото собаки',
     ].join('\n')
   },
 
