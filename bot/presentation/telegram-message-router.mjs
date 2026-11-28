@@ -15,8 +15,9 @@ export const telegramMessageRouter = {
       return
     }
 
+    // команды приходят в виде текста в формате '/command arg1 arg2 ...'
     const [rawCommand, ...args] = text.trim().split(/\s+/)
-    const command = rawCommand.split('@')[0].toLowerCase()
+    const command = rawCommand.split('@')[0].toLowerCase() // удаляем @botname из команды (в группе часто может быть команда /start@YourBotName)
 
     switch (command) {
       case '/start':

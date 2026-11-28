@@ -4,7 +4,7 @@ export const startUseCase = {
   async execute({ chatId }) {
     await showCommandsUseCase.execute({
       chatId,
-      preface: 'Привет! Я бот для курса и погоды 👋',
+      preface: 'Привет! Я твой бот 👋',
     })
   },
 }
